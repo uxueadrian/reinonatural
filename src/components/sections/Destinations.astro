@@ -1,0 +1,57 @@
+---
+import { destinations } from '../../data/site';
+import PhotoPlaceholder from '../PhotoPlaceholder.astro';
+---
+
+<section id="destinos" class="border-b border-sand-200 bg-sand-100">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <div data-animate="fade-up" class="mx-auto max-w-2xl space-y-4 text-center">
+      <h2 class="text-3xl font-bold text-forest-900 sm:text-4xl">
+        Destinos y montañas
+      </h2>
+      <p class="text-sand-800">
+        [TODO: client-approved section intro about the destinations offered]
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-12 md:space-y-16">
+      {
+        destinations.map((destination, index) => {
+          const flip = index % 2 === 1;
+          return (
+            <article
+              data-animate="fade-up"
+              class="grid items-center gap-6 md:grid-cols-2 md:gap-10"
+            >
+              <PhotoPlaceholder class={flip ? 'md:order-2' : ''} />
+              <div class:list={['space-y-3', flip && 'md:order-1']}>
+                <h3 class="text-2xl font-semibold text-forest-800">
+                  {destination.name}
+                </h3>
+                <p class="text-sand-800">{destination.description}</p>
+                <dl class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                  <div>
+                    <dt class="font-semibold text-forest-700">Ubicación</dt>
+                    <dd class="text-sand-800">{destination.location}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-forest-700">Altitud</dt>
+                    <dd class="text-sand-800">{destination.altitude}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-forest-700">Dificultad</dt>
+                    <dd class="text-sand-800">{destination.difficulty}</dd>
+                  </div>
+                  <div>
+                    <dt class="font-semibold text-forest-700">Duración</dt>
+                    <dd class="text-sand-800">{destination.duration}</dd>
+                  </div>
+                </dl>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

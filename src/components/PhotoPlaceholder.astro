@@ -1,0 +1,18 @@
+---
+interface Props {
+  label?: string;
+  class?: string;
+}
+
+const { label = '[TODO: client photo]', class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex aspect-video items-center justify-center rounded-lg border border-dashed border-sand-400 bg-sand-100 p-4 text-center text-sm text-sand-600',
+    className,
+  ]}
+  aria-hidden="true"
+>
+  {label}
+</div>

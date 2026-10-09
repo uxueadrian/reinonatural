@@ -1,0 +1,31 @@
+---
+import { staff } from '../../data/site';
+import PhotoPlaceholder from '../PhotoPlaceholder.astro';
+---
+
+<section id="staff" class="border-b border-sand-200">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <div data-animate="fade-up" class="mx-auto max-w-2xl space-y-4 text-center">
+      <h2 class="text-3xl font-bold text-forest-900 sm:text-4xl">Staff</h2>
+      <p class="text-sand-800">
+        [TODO: client-approved intro about the agency team]
+      </p>
+    </div>
+
+    <div class="mt-12 flex flex-wrap items-start justify-center gap-x-12 gap-y-10">
+      {
+        staff.map((member) => (
+          <article
+            data-animate="fade-up"
+            class="w-full max-w-xs space-y-3 text-center sm:w-auto"
+          >
+            <PhotoPlaceholder class="mx-auto aspect-square w-40 rounded-full" />
+            <h3 class="text-lg font-semibold text-forest-800">{member.name}</h3>
+            <p class="text-sm font-medium text-clay-700">{member.role}</p>
+            <p class="text-sand-800">{member.bio}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

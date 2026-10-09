@@ -1,0 +1,135 @@
+---
+import '../styles/global.css';
+import { site, navItems } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.name, description = site.description } = Astro.props;
+const pageTitle = title === site.name ? site.name : `${title} · ${site.name}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="min-h-screen antialiased">
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-clay-600 focus:px-4 focus:py-2 focus:text-white"
+    >
+      Saltar al contenido
+    </a>
+
+    <header class="sticky top-0 z-40 border-b border-sand-200 bg-sand-50/95 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <a href="#inicio" class="font-display text-lg font-bold text-forest-800">
+          {site.name}
+        </a>
+
+        <button
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="site-nav"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-sand-300 text-forest-800 md:hidden"
+        >
+          <span class="sr-only">Abrir menú</span>
+          <svg
+            aria-hidden="true"
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          >
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+        <nav id="site-nav" data-nav-panel aria-label="Secciones" class="hidden md:block">
+          <ul class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    class="rounded px-2 py-1 text-sand-800 transition-colors hover:bg-sand-100 hover:text-forest-700"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <nav
+        id="site-nav-mobile"
+        data-nav-panel
+        aria-label="Secciones (móvil)"
+        class="hidden border-t border-sand-200 bg-sand-50 md:hidden"
+      >
+        <ul class="mx-auto max-w-6xl px-4 py-2 sm:px-6">
+          {
+            navItems.map((item) => (
+              <li>
+                <a href={item.href} class="block rounded px-3 py-3 text-sand-800 hover:bg-sand-100">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+      const panels = document.querySelectorAll<HTMLElement>('[data-nav-panel]');
+
+      const setOpen = (open: boolean) => {
+        for (const panel of panels) {
+          // On desktop the inline nav stays visible via CSS (md:block);
+          // only the mobile panel is toggled here.
+          if (panel.id === 'site-nav-mobile') {
+            panel.classList.toggle('hidden', !open);
+          }
+        }
+        toggle?.setAttribute('aria-expanded', String(open));
+      };
+
+      toggle?.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        setOpen(open);
+      });
+
+      // Close the mobile menu after choosing a section (touch-friendly UX).
+      for (const panel of panels) {
+        panel.addEventListener('click', (event) => {
+          const target = event.target as HTMLElement | null;
+          if (target?.closest('a')) setOpen(false);
+        });
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setOpen(false);
+      });
+    </script>
+  </body>
+</html>

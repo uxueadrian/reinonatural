@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Destinations from '../components/sections/Destinations.astro';
+import TrackRecord from '../components/sections/TrackRecord.astro';
+import RoutesByLevel from '../components/sections/RoutesByLevel.astro';
+import Experiences from '../components/sections/Experiences.astro';
+import GearRental from '../components/sections/GearRental.astro';
+import Staff from '../components/sections/Staff.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import Contact from '../components/sections/Contact.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+
+<Layout>
+  <Hero />
+  <About />
+  <Destinations />
+  <TrackRecord />
+  <RoutesByLevel />
+  <Experiences />
+  <GearRental />
+  <Staff />
+  <Gallery />
+  <Contact />
+  <Footer />
+
+  <script>
+    import { initAnimations } from '../scripts/animations';
+
+    // Register GSAP animations only on the main page (registered once here).
+    initAnimations();
+  </script>
+</Layout>

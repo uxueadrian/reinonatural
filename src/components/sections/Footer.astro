@@ -1,0 +1,36 @@
+---
+import { site, socials } from '../../data/site';
+---
+
+<footer class="bg-forest-900 text-sand-100">
+  <div class="mx-auto max-w-6xl space-y-6 px-4 py-12 sm:px-6">
+    <p class="font-display text-lg font-bold">{site.name}</p>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <span class="text-sm text-sand-300">Redes sociales:</span>
+      {
+        socials.map((social) =>
+          social.url ? (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded px-2 py-1 text-sm text-sand-100 underline-offset-4 hover:underline"
+            >
+              {social.platform}
+            </a>
+          ) : (
+            <span class="rounded border border-dashed border-sand-600 px-2 py-1 text-sm text-sand-400">
+              [TODO: {social.platform} URL]
+            </span>
+          ),
+        )
+      }
+    </div>
+
+    <p class="text-xs text-sand-400">
+      Sitio informativo. Contenido provisional pendiente de aprobación del
+      cliente. No es un sistema de reservaciones ni de pagos.
+    </p>
+  </div>
+</footer>

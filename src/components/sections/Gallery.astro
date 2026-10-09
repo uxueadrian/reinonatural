@@ -1,0 +1,32 @@
+---
+import { gallery } from '../../data/site';
+import PhotoPlaceholder from '../PhotoPlaceholder.astro';
+---
+
+<section id="galeria" class="border-b border-sand-200 bg-sand-100">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <div data-animate="fade-up" class="mx-auto max-w-2xl space-y-4 text-center">
+      <h2 class="text-3xl font-bold text-forest-900 sm:text-4xl">Galería</h2>
+      <p class="text-sand-800">
+        [TODO: client-approved photographs for the gallery]
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        gallery.map((image) =>
+          image.src ? (
+            <img
+              src={image.src}
+              alt={image.alt}
+              loading="lazy"
+              class="aspect-square w-full object-cover"
+            />
+          ) : (
+            <PhotoPlaceholder class="aspect-square" />
+          ),
+        )
+      }
+    </div>
+  </div>
+</section>

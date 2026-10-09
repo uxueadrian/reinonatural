@@ -1,0 +1,49 @@
+---
+import { gear } from '../../data/site';
+import PhotoPlaceholder from '../PhotoPlaceholder.astro';
+import WhatsAppLink from '../WhatsAppLink.astro';
+---
+
+<section id="renta-equipo" class="border-b border-sand-200 bg-sand-100">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <div data-animate="fade-up" class="mx-auto max-w-2xl space-y-4 text-center">
+      <h2 class="text-3xl font-bold text-forest-900 sm:text-4xl">Renta de equipo</h2>
+      <p class="text-sand-800">
+        [TODO: client-approved list of rental items — only confirmed items
+        will be published]
+      </p>
+    </div>
+
+    <div class="mt-12 space-y-12 md:space-y-16">
+      {
+        gear.map((item) => (
+          <article
+            data-animate="fade-up"
+            class="grid items-center gap-6 md:grid-cols-2 md:gap-10"
+          >
+            <PhotoPlaceholder />
+            <div class="space-y-2">
+              <h3 class="text-2xl font-semibold text-forest-800">{item.name}</h3>
+              <p class="text-sand-800">{item.description}</p>
+              <p class="text-sm text-sand-600">{item.notes}</p>
+              {item.price ? (
+                <p class="font-semibold text-clay-700">{item.price}</p>
+              ) : (
+                <p class="text-sm text-sand-600">
+                  [TODO: price/conditions — pending client confirmation]
+                </p>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div data-animate="fade-up" class="mt-10 text-center">
+      <WhatsAppLink>Consultar disponibilidad por WhatsApp</WhatsAppLink>
+      <p class="mt-2 text-xs text-sand-600">
+        La consulta inicia una conversación; no es un sistema de reservaciones.
+      </p>
+    </div>
+  </div>
+</section>

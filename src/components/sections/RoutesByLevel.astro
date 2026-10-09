@@ -1,0 +1,51 @@
+---
+import { routeLevels } from '../../data/site';
+---
+
+<section id="rutas" class="border-b border-sand-200 bg-sand-100">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+    <div data-animate="fade-up" class="mx-auto max-w-2xl space-y-4 text-center">
+      <h2 class="text-3xl font-bold text-forest-900 sm:text-4xl">Rutas por nivel</h2>
+      <p class="text-sand-800">
+        [TODO: client-approved intro about the four difficulty categories]
+      </p>
+    </div>
+
+    <div class="mt-12 border-t border-sand-300">
+      {
+        routeLevels.map((level) => (
+          <article
+            data-animate="fade-up"
+            id={`nivel-${level.id}`}
+            class="border-b border-sand-300 py-8 md:py-10"
+          >
+            <div class="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-10">
+              <div class="space-y-2">
+                <h3 class="text-2xl font-semibold text-forest-800">{level.name}</h3>
+                <p class="text-sand-800">{level.description}</p>
+              </div>
+              <dl class="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2">
+                <div>
+                  <dt class="font-semibold text-forest-700">Características</dt>
+                  <dd class="text-sand-800">{level.features}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-forest-700">Destinos relacionados</dt>
+                  <dd class="text-sand-800">{level.relatedDestinations}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-forest-700">Duración / exigencia</dt>
+                  <dd class="text-sand-800">{level.duration}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-forest-700">Recomendaciones</dt>
+                  <dd class="text-sand-800">{level.recommendations}</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

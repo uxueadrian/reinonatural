@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens — PLACEHOLDER values.
+ *
+ * The earth/outdoor palette below is a neutral starting point only. Swap
+ * every token for the agency's real brand colors (and fonts) once the
+ * client provides them. Keep token names stable so components do not change.
+ */
+@theme {
+  /* Fonts: replace --font-display / --font-sans with the client's brand fonts. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-display: Georgia, 'Times New Roman', ui-serif, serif;
+
+  /* Sand — light neutral surfaces */
+  --color-sand-50: #fbf8f3;
+  --color-sand-100: #f5efe5;
+  --color-sand-200: #eae0cf;
+  --color-sand-300: #dbcdb2;
+  --color-sand-400: #c7b190;
+  --color-sand-500: #b69a74;
+  --color-sand-600: #a98863;
+  --color-sand-700: #8d6f52;
+  --color-sand-800: #745c47;
+  --color-sand-900: #604d3d;
+
+  /* Clay — warm accent (buttons, highlights) */
+  --color-clay-50: #fdf5ef;
+  --color-clay-100: #fbe9dc;
+  --color-clay-200: #f5d0b8;
+  --color-clay-300: #edb08a;
+  --color-clay-400: #e48c5c;
+  --color-clay-500: #dd6f3c;
+  --color-clay-600: #cb5630;
+  --color-clay-700: #a9422a;
+  --color-clay-800: #873828;
+  --color-clay-900: #6d3124;
+
+  /* Forest — greens (secondary accent, outdoors feel) */
+  --color-forest-50: #f2f7f1;
+  --color-forest-100: #e0ede0;
+  --color-forest-200: #c2dbc4;
+  --color-forest-300: #98c19d;
+  --color-forest-400: #6da376;
+  --color-forest-500: #4e875b;
+  --color-forest-600: #3b6c48;
+  --color-forest-700: #31573b;
+  --color-forest-800: #2a4632;
+  --color-forest-900: #243a2b;
+
+  /* Ink — text color */
+  --color-ink: #26221e;
+}
+
+@layer base {
+  html {
+    /* Anchor offset so the sticky header never covers section titles. */
+    scroll-padding-top: 5rem;
+    /* Smooth scrolling only when the user has not asked for reduced motion. */
+    scroll-behavior: auto;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-x: hidden; /* guards against accidental horizontal scroll */
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-clay-600);
+    outline-offset: 2px;
+  }
+}
